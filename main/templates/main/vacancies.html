@@ -1,25 +1,25 @@
 {% extends 'main/base_template.html' %}
 
 {% block content %}
-
+    <h2 class="vacancies-h">Вакансии Разработчика игр (Gamedev) с hh.ru</h2>
     {% for v in vacancies %}
         <div class="vacancy">
             <h4>{{ v.name }}</h4>
             <p>
                 Описание:
-                {{ vacancy.description }}
+                {{ v.description }}
             </p>
             <p>
                 Навыки:
-                {% for skill in vacancy.key_skills %}
+                {% for skill in v.key_skills %}
                     {{ skill.name }},
                 {% endfor %}
             </p>
             <p>Кампания: {{ v.employer.name }}</p>
-            <p>Оклад от {{ v.salary.from }} до {{ v.salary.to }} {{ v.salary.currency }}</p>
+            <p>Оклад: от {{ v.salary.from }} до {{ v.salary.to }} {{ v.salary.currency }}</p>
             <p>Название регион: {{ v.area.name }}</p>
             <p>Дата публикации вакансии: {{ v.published_at }}</p>
-            <p class="">{{v}}</p>
+{#            <p class="">{{v}}</p>#}
         </div>
     {% endfor %}
 {% endblock %}

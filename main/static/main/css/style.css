@@ -6,7 +6,7 @@
 
 body {
     background-color: antiquewhite;
-    color: #565e64!important;
+    color: #565e64;
     display: block;
     font-size: 20px;
 }
@@ -26,13 +26,14 @@ li {
 
 
 a {
-    margin: 10px;
+    /*margin: 10px;*/
     font-size: 14px;
     text-decoration: none;
     text-transform: uppercase;
 }
 
 #container {
+    max-width: 2000px;
     box-shadow: 0 0 5px;
     margin-left: auto;
     margin-right: auto;
@@ -40,6 +41,7 @@ a {
 }
 
 header {
+    max-width: 2000px;
     position: sticky;
     background-color: #0dcaf0;
     background-color: #cbccce;
@@ -72,8 +74,12 @@ header h2 {
     display: inline;
 }
 
+header a {
+    color: #565e64;
+}
+
 .logo {
-    box-shadow: 0 0 5px;
+    box-shadow: 0 0 10px black;
     width: 312px;
     margin-left: 100px;
     margin-right: 70px;
@@ -94,7 +100,6 @@ main {
     top: 150px;
     width: 11%;
     /*width: 300px;*/
-    border-right: 2px solid red;
 }
 
 .nav a {
@@ -104,8 +109,6 @@ main {
 .content {
     margin-left: 15%;
     width: 70%;
-    border-left: 2px solid red;
-    border-right: 2px solid red;
 }
 
 table, td, tr {
@@ -154,8 +157,31 @@ footer {
 
 p {
     padding: 10px;
+    text-indent: 20px;
 }
 
 ol {
     padding: 10px 40px;
+}
+
+.vacancy {
+    margin-top: 20px;
+}
+
+.vacancy h4 {
+    margin: 20px 20px 20px 50px;
+}
+
+.vacancies-h {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.vacancy p {
+    padding: 10px;
+}
+
+
+a:hover {
+    color: red;
 }

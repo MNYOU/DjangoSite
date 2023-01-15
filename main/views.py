@@ -65,6 +65,8 @@ def last_vacancies(request):
     response = requests.get(url, headers={"User-Agent": "api-test-agent"})
     given_vacancies = response.json()['items']
     given_vacancies.reverse()
+    if len(given_vacancies) == 0:
+        print(dates)
     request_method = lambda x: requests.get(f"https://api.hh.ru/vacancies/{x}",
                                             headers={"User-Agent": "api-test-agent"})
     vacancies = []
@@ -78,7 +80,8 @@ def last_vacancies(request):
 
 
 def get_random_date():
-    day_from = random.randint(1, 31)
+    # до 3 числа нет вакансий
+    day_from = random.randint(4, 31)
     day_to = day_from + 5
     if len(str(day_from)) == 1:
         day_from = '0' + str(day_from)

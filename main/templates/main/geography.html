@@ -1,0 +1,26 @@
+{% extends 'main/base_template.html' %}
+{% load static %}
+
+{% block content %}
+    <h2>Статистика в виде графика</h2>
+    <img class="graph" src="{% static 'main/images/graph.png' %}" alt="графики">
+    <h2>Статистика в виде таблицы</h2>
+        <table class="">
+            <tr>
+                {% for heading in headings_cities %}
+                    {% if heading != None %}
+                <td class="bold">{{heading}}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            {% for row in data_cities %}
+            <tr>
+                {% for cell in row %}
+                    {% if cell != None  %}
+                        <td>{{cell}}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+{% endblock %}

@@ -1,4 +1,6 @@
 import re
+import openpyxl
+import os
 from openpyxl import Workbook
 from openpyxl.styles import NamedStyle, Font, Border, Side
 from openpyxl.styles.numbers import BUILTIN_FORMATS
@@ -33,7 +35,44 @@ def vacancies(request, vacancy_id):
 
 
 def relevance(request):
-    return render(request, 'main/relevance.html', {"title": "Востребованность"})
+    path = os.path.abspath(os.path.curdir)
+    book = openpyxl.load_workbook(f'{path}\\main\\static\\main\\report.xlsx')
+    data = create_template(book)
+    data['title'] = "Востребованность"
+    return render(request, 'main/relevance.html', data)
+
+
+def create_template(book):
+    """Создает html шаблон pdf файла"""
+    headings_years, data_years = get_formatted_data(book, 'Статистика по годам')
+    headings_cities, data_cities = get_formatted_data(book, 'Статистика по городам', True)
+    pdf_template = {'headings_years': headings_years, 'data_years': data_years,
+         'headings_cities': headings_cities, 'data_cities': data_cities}
+    return pdf_template
+
+
+def get_formatted_data(book, sheet_name, need_formatting=False):
+    """Возвращает данные для html шаблона в специальном формате
+
+    Args:
+        sheet_name (str): Название листа, из которого будут браться данные
+        need_formatting (bool): Показывает, нужно ли добавлять к ячейкам '%'
+
+    Returns:
+        (list): Список названий столбцов и данные
+    """
+    data = []
+    is_heading = True
+    for row in book[sheet_name]:
+        if is_heading:
+            naming = list(map(lambda x: x.value, row))
+            is_heading = False
+        else:
+            row_values = list(map(lambda x: x.value, row))
+            if need_formatting:
+                row_values[-1] = format(row_values[-1], '.2%')
+            data.append(row_values)
+    return naming, data
 
 
 def last_vacancies(request):
